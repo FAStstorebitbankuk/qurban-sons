@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("postgres://default:3uHZ6tBhzRmf@ep-purple-cloud-a40uw2lm.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require")
+}
+
+model User {
+  id                   Int      @id @default(autoincrement())
+  email                String   @unique
+  password             String
+  accountId            String   @map("account_id")
+  country              String   @map("country")
+  lastLoginAt          DateTime @default(now()) @map("last_login_at")
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("users")
+}
