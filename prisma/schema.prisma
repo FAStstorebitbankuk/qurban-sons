@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("postgres://default:3uHZ6tBhzRmf@ep-purple-cloud-a40uw2lm.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require")
+  url      = "postgres://default:3uHZ6tBhzRmf@ep-purple-cloud-a40uw2lm-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15"
 }
 
 model User {
@@ -21,4 +21,17 @@ model User {
   updatedAt            DateTime @default(now()) @updatedAt @map("updated_at")
 
   @@map("users")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  title     String   @db.VarChar(255)
+}
+
+enum Role {
+  USER
+  ADMIN
 }
