@@ -6,19 +6,19 @@
 DB_NAME="qurban-sons"
 
 # Check if the database exists
-db_exists=$(psql -tAc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME'")
+db_exists=$(psql -tAc "SELECT 1 FROM pg_database WHERE datname='$QURBAN_SONS'")
 
 if [ "$db_exists" != "1" ]; then
   # Create the database
   echo "Creating database..."
-  psql -c "CREATE DATABASE $DB_NAME;"
+  psql -c "CREATE DATABASE $QURBAN_SONS;"
 else
   echo "Database already exists, skipping creation..."
 fi
 
 # Connect to the database and create the users table if it doesn't exist
 echo "Creating users table..."
-psql -d $DB_NAME -c "
+psql -d $QURBAN_SONS -c "
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   email TEXT UNIQUE NOT NULL,
