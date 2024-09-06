@@ -3,7 +3,7 @@ FROM node:18
 # replace this with your application's default port
 EXPOSE 3000
 # Set the working directory in the container
-WORKDIR banking/src/app
+WORKDIR /app
 
 # Copy the application files into the working directory
 COPY . banking/src/app
