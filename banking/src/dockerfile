@@ -6,7 +6,7 @@ EXPOSE 3000
 WORKDIR /app
 
 # Copy the application files into the working directory
-COPY . banking/src/app
+COPY . /app
 
 # Install the application dependencies
 RUN npm install
