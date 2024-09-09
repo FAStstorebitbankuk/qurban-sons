@@ -1,20 +1,21 @@
-# Use the official Node.js image from the Docker Hub
+# Use the official Node.js 18 image.
 FROM node:18
 
-# Create and change to the app directory
+# Create and change to the app directory.
 WORKDIR /usr/src/app
 
-# Copy application dependency manifests to the container image
+# Install application dependencies.
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the application code to the container image
+# Copy application files.
 COPY . .
 
-# Expose the port that your app will be running on
+# Build the application.
+RUN npm run build
+
+# Expose the port on which the app runs (typically 3000 for Next.js).
 EXPOSE 3000
 
-# Run the application
-CMD ["node", "index.js"]
+# Start the application.
+CMD ["npx", "next", "start"]
